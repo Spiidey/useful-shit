@@ -192,6 +192,11 @@ nmap | 5
 
  - `/usr/share/seclists/Discovery/Web_Content/common.txt`
 
+ - `/usr/share/seclists/Discovery/Web-Content/web-extensions.txt`
+
+ - `/usr/share/seclists/Discovery/Web-Content/quickhits.txt`
+ -- note: you need to use -t option with dirb on the quickhits wordlist (every line begins with forward-slash [/])
+
 ### ShellShock
 
 **There are many ways to handle a shellshock vulnerability, from browser extensions/plugins to python scripts to Metasploit...**
