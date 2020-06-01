@@ -199,7 +199,7 @@ ntent/quickhits.txt -t -o dirb-quickhits.txt`
 
  - `/usr/share/seclists/Discovery/Web-Content/quickhits.txt`
 
- -- note: you need to use -t option with dirb on the quickhits wordlist (every line begins with forward-slash [/])
+   -- note: you need to use -t option with dirb on the quickhits wordlist (every line begins with forward-slash [/])
 
 ### ShellShock
 
