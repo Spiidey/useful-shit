@@ -180,8 +180,7 @@ nmap | 5
 
 - `dirb https://<targetIP> /usr/share/wordlists/dirb/common.txt -o dirb-https.txt`
 
-- `dirb http://<targetIP> /usr/share/seclists/Discovery/Web-Co
-ntent/quickhits.txt -t -o dirb-quickhits.txt`
+- `dirb http://<targetIP> /usr/share/seclists/Discovery/Web-Content/quickhits.txt -t -o dirb-quickhits.txt`
 
 - `wfuzz -w file1.txt -w file2.txt --hc 404 http://<targetIP>/dir/FUZZFUZ2Z`
 
