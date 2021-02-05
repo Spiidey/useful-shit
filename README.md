@@ -90,9 +90,10 @@ Calculating upgrade... Done
   5. [SMTP](#smtp)? check for valid users with netcat/VRFY or scripts. Exim? SendMail? - Check sploits.
   6. Some random/weird port? Use telnet or nc to it and see what output we get.
 
-4. Run [`searchsploit`](https://github.com/offensive-security/exploit-database) or Google the service/software version of each port.
+4. Run [`searchsploit`](https://github.com/offensive-security/exploit-database) or Google the service/software version of each port. 
+   - Sometimes though, you don't have to use an exploit. You might find something useful on [PayloadsAllTheThings](https://github.com/swisskyrepo/PayloadsAllTheThings) ([Reverse Shell Cheatsheet](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology%20and%20Resources/Reverse%20Shell%20Cheatsheet.md)) or [GTFOBins](https://gtfobins.github.io/).
 
-5. Try to exploit the vulnerability you found with `searchsploit` to gain a limited or root shell - just don't be a tard and DoS shit.
+5. Try to exploit the vulnerability you found with `searchsploit` to gain a limited or root shell - just don't be foolish and DoS shit. It ruins your experience and others' as well.
   - If limited shell then use the linux or windows exploit suggesters, "searchsploit kernel x.x" and search for common weaknesses in the software.
 
 
@@ -630,6 +631,10 @@ apt -y install seclists
 
 `git clone https://github.com/AusJock/Privilege-Escalation.git`
 
+**PayloadsAllTheThings:** https://github.com/swisskyrepo/PayloadsAllTheThings
+   *Reverse Shell Cheatsheet:* [https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology and Resources/Reverse Shell Cheatsheet.md](https://github.com/swisskyrepo/PayloadsAllTheThings/blob/master/Methodology and Resources/Reverse Shell Cheatsheet.md)
+
+**GTFOBins:** https://gtfobins.github.io/
 
 Nmap cheat sheet - https://highon.coffee/blog/nmap-cheat-sheet/
 
