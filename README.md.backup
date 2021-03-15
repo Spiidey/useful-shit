@@ -181,12 +181,11 @@ nmap | 5
 
 - `dirb https://<targetIP> /usr/share/wordlists/dirb/common.txt -o dirb-https.txt`
 
-- `gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html -t 20 -o gobuster-dirlist-2.3-medium.txt -u <targetIP>`
-
 - `dirb http://<targetIP> /usr/share/seclists/Discovery/Web-Content/quickhits.txt -t -o dirb-quickhits.txt`
 
 - `wfuzz -w file1.txt -w file2.txt --hc 404 http://<targetIP>/dir/FUZZFUZ2Z`
 
+- `gobuster dir -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -x php,html -t 20 -o gobuster-dirlist-2.3-medium.txt -u <targetIP>`
 
 - **Wordlists:**
 
