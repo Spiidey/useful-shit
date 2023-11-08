@@ -130,7 +130,9 @@ fetch("login").then(res => res.text().then(data => {
 `sqlmap -u "$URL/index.php?id=1"`
 
 ### sqlmap POST parameter
+
 Copy POST request from Burp Suite into `post.req` file
+
 `sqlmap -r post.req -p parameter`
 
 SELECT * FROM menu WHERE name = 'Tostadas'
