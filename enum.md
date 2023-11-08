@@ -52,6 +52,12 @@ wfuzz -c -z file,/usr/share/wordlists/seclists/Discovery/Web-Content/burp-parame
 wfuzz -c -z file,/usr/share/wordlists/seclists/Usernames/cirt-default-usernames.txt --hc 404,301 "$URL/index.php?parameter=FUZZ"
 ```
 
+### XSS Fuzz
+```shell
+wfuzz -c -z file,/usr/share/seclists/Fuzzing/XSS/XSS-Jhaddix.txt --hh 0 "$URL/index.php?id=FUZZ"
+```
+
+
 ## Gobuster
 
 ### Endpoint discovery
