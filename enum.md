@@ -56,7 +56,10 @@ wfuzz -c -z file,/usr/share/wordlists/seclists/Usernames/cirt-default-usernames.
 ```shell
 wfuzz -c -z file,/usr/share/seclists/Fuzzing/XSS/XSS-Jhaddix.txt --hh 0 "$URL/index.php?id=FUZZ"
 ```
-
+### SQLi Fuzz (copy params from Burp)
+```shell
+wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -d "db=mysql&id=FUZZ" -u $URL
+```
 
 ## Gobuster
 
