@@ -1,6 +1,6 @@
 # Burp Suite Stuff
 
-## CSRF Macro for Intruder
+## CSRF Macro (Intruder/Repeater)
 
 Some pages, like login and contact forms, have CSRF tokens embedded as invisible parameters that are submitted to the server. These tend to change with every request made and can trip up password-guessing and brute attacks due to invalid CSRF from previously captured requests. We can create and use a macro in Burp Suite to automate updating these tokens for us.
 
