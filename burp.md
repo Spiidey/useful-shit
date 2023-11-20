@@ -4,7 +4,7 @@
 
 Some pages, like login and contact forms, have CSRF tokens embedded as hidden parameters that are submitted to the server. These tend to change with every request made and can trip up password-guessing and brute attacks due to invalid CSRF from previously captured requests. We can create and use a macro in Burp Suite to automate updating these tokens for us.
 
-1. Capture an applicable set of request(s) for the attack - a GET for the macro and (usually) a POST to submit the form.
+1. In Proxy, capture an applicable set of request(s) for the attack - a GET for the macro and (usually) a POST to submit the form.
 
 2. Set up the Macro:
 
@@ -33,3 +33,29 @@ Some pages, like login and contact forms, have CSRF tokens embedded as hidden pa
 14. In "URL Scope", select **"Use suite scope"** (if you haven't set one, select **"Use custom scope"**). Now the macro only applies to things in scope.
 
 15. Click OK to close the Session handling rules window, and close your settings window. You should be all set-up to rock and roll now.
+
+# Other tools
+
+*(adapted from: [THM: Burp Suite Other Modules](https://tryhackme.com/room/burpsuiteom))*
+
+## Decoder
+
+1. Decode/Encode a variety of formats including URL, HTML, Base64, ASCII Hex, Hex, Octal and others.
+
+2. Hashing: Enter the text to hash; select the hash type; in the lower box, encode as ASCII Hex and bam, you got your hash.
+
+## Comparer
+
+1. Compares requests or responses side-by-side to determine the delta. 
+
+## Sequencer
+
+1. Sequencer allows us to evaluate the entropy of "tokens". If tokens aren't generated securely, theoretically we could predict upcoming token values.
+
+2. Two ways to perform token analysis with Sequencer:
+
+- **Live Capture:** Live capture lets us pass a request that will generate a token to Sequencer for analysis. For instance, we might want to pass a POST request to a login endpoint to Sequencer, knowing that the server will respond with a cookie. With the request passed in, we can instruct Sequencer to start a live capture. It will then automatically make the same request thousands of times, storing the generated token samples for analysis. After collecting enough samples, we stop the Sequencer and allow it to analyze the captured tokens.
+
+- **Manual Load:** This allows us to load a list of pre-generated token samples directly into Sequencer for analysis.
+
+## Organizer 
