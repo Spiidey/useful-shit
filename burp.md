@@ -36,11 +36,11 @@ Some pages, like login and contact forms, have CSRF tokens embedded as hidden pa
 
 # Other tools
 
-*(adapted from: [THM: Burp Suite Other Modules](https://tryhackme.com/room/burpsuiteom))*
+*(adapted from: [THM Burp Suite: Other Modules](https://tryhackme.com/room/burpsuiteom))*
 
 ## Decoder
 
-1. Decode/Encode a variety of formats including URL, HTML, Base64, ASCII Hex, Hex, Octal and others.
+1. Decode/Encode a variety of formats including URL, HTML, Base64, ASCII Hex, Hex, Octal and others. Also features a "Smart decode" option that iterates through encodings until it gets plaintext. "Smart decode" isn't 100% reliable in my experience.
 
 2. Hashing: Enter the text to hash; select the hash type; in the lower box, encode as ASCII Hex and bam, you got your hash.
 
@@ -56,6 +56,10 @@ Some pages, like login and contact forms, have CSRF tokens embedded as hidden pa
 
 - **Live Capture:** Live capture lets us pass a request that will generate a token to Sequencer for analysis. For instance, we might want to pass a POST request to a login endpoint to Sequencer, knowing that the server will respond with a cookie. With the request passed in, we can instruct Sequencer to start a live capture. It will then automatically make the same request thousands of times, storing the generated token samples for analysis. After collecting enough samples, we stop the Sequencer and allow it to analyze the captured tokens.
 
-- **Manual Load:** This allows us to load a list of pre-generated token samples directly into Sequencer for analysis.
+- **Manual Load:** This allows us to load a list of pre-generated token samples directly into Sequencer for analysis. Might never use this.
 
-## Organizer 
+## Organizer
+
+1. The Organizer module helps store and allows annotation of copies of HTTP requests that you may want to revisit later. Items in Organizer are READ-ONLY.
+
+2. You might want to use Organizer to keep copies of interesting requests/responses or features you might want to look into more later. 
