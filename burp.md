@@ -2,9 +2,9 @@
 
 ## CSRF Macro (Intruder/Repeater)
 
-Some pages, like login and contact forms, have CSRF tokens embedded as invisible parameters that are submitted to the server. These tend to change with every request made and can trip up password-guessing and brute attacks due to invalid CSRF from previously captured requests. We can create and use a macro in Burp Suite to automate updating these tokens for us.
+Some pages, like login and contact forms, have CSRF tokens embedded as hidden parameters that are submitted to the server. These tend to change with every request made and can trip up password-guessing and brute attacks due to invalid CSRF from previously captured requests. We can create and use a macro in Burp Suite to automate updating these tokens for us.
 
-1. Capture an applicable request
+1. Capture an applicable set of request(s) for the attack - a GET for the macro and (usually) a POST to submit the form.
 
 2. Set up the Macro:
 
@@ -14,7 +14,7 @@ Some pages, like login and contact forms, have CSRF tokens embedded as invisible
 
 5. In the "Session handling rule editor", give your rule a meaningful description, and then under **"Rule actions"** click **"Add"**, then select **"Run a macro"**. Again, a new window opens (Session handling action editor).
 
-6. Under "Select macro", click **"Add"** and "Macro recorder" window opens. Select the request you want to attack and press **"OK"**. Now you can use the "Macro Editor" that was hidden behind the "Macro recorder" window.
+6. Under "Select macro", click **"Add"** and "Macro recorder" window opens. Select the GET request you want to get tokens from for the attack and press **"OK"**. Now you can use the "Macro Editor" that was hidden behind the "Macro recorder" window.
 
 7. In "Macro Editor", give your new macro a meaningful name, like "CSRF-Grabber". Click "OK" to close the editor. Now we're back to the Session handling action editor, and our macro is selected.
 
