@@ -50,6 +50,13 @@ Calculating upgrade... Done
   `apt update && apt upgrade -y`
 
 
+# 09 Jan 2025 - update
+
+Wow, lots has happened over the years. This repo is pretty stale and I wanna refresh it a bit. It's still handy, but could be handier.
+
+Here's a new trick I learned - set up a `genmon` in your taskbar and set this as the command to show your VPN IP: `sh -c 'ip a | awk "/tun0\$/{gsub(/\/.*/, \"\"); print \$2}"'`
+
+
 ## Enumeration, Exploitation and Post-ex/PrivEsc Process
 
 1. Start With Network Enumeration.
