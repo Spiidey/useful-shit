@@ -1,4 +1,4 @@
-Taken from the README.md on feroxbuster GitHub
+Taken from the [README.md on feroxbuster GitHub](https://github.com/epi052/feroxbuster/blob/af3dcdf6a24bf137256cfa6ffc3eff07c5a6eadd/README.md).
 
 ## 🧰 Example Usage
 
